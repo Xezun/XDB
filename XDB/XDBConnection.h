@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class XDBField;
+
 @interface XDBConnection : NSObject
 
 @end

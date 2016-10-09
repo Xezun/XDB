@@ -7,19 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A2512DF1DAA84D10070B56F /* XDBConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A2512D81DAA84D10070B56F /* XDBConnection.m */; };
+		8A2512E01DAA84D10070B56F /* XDBConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A2512DA1DAA84D10070B56F /* XDBConstant.m */; };
+		8A2512E11DAA84D10070B56F /* XDBField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A2512DC1DAA84D10070B56F /* XDBField.m */; };
+		8A2512E21DAA84D10070B56F /* XDBRecordset.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A2512DE1DAA84D10070B56F /* XDBRecordset.m */; };
 		DD44CD131DAA6CF800ED9023 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD44CD121DAA6CF800ED9023 /* main.m */; };
 		DD44CD161DAA6CF800ED9023 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD44CD151DAA6CF800ED9023 /* AppDelegate.m */; };
 		DD44CD191DAA6CF800ED9023 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD44CD181DAA6CF800ED9023 /* ViewController.m */; };
 		DD44CD1C1DAA6CF800ED9023 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD44CD1A1DAA6CF800ED9023 /* Main.storyboard */; };
 		DD44CD1E1DAA6CF800ED9023 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD44CD1D1DAA6CF800ED9023 /* Assets.xcassets */; };
 		DD44CD211DAA6CF800ED9023 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD44CD1F1DAA6CF800ED9023 /* LaunchScreen.storyboard */; };
-		DD44CD311DAA6D3C00ED9023 /* XDBConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = DD44CD2A1DAA6D3C00ED9023 /* XDBConnection.m */; };
-		DD44CD321DAA6D3C00ED9023 /* XDBConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = DD44CD2C1DAA6D3C00ED9023 /* XDBConstant.m */; };
-		DD44CD331DAA6D3C00ED9023 /* XDBField.m in Sources */ = {isa = PBXBuildFile; fileRef = DD44CD2E1DAA6D3C00ED9023 /* XDBField.m */; };
-		DD44CD341DAA6D3C00ED9023 /* XDBRecordset.m in Sources */ = {isa = PBXBuildFile; fileRef = DD44CD301DAA6D3C00ED9023 /* XDBRecordset.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8A2512D71DAA84D10070B56F /* XDBConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDBConnection.h; sourceTree = "<group>"; };
+		8A2512D81DAA84D10070B56F /* XDBConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDBConnection.m; sourceTree = "<group>"; };
+		8A2512D91DAA84D10070B56F /* XDBConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDBConstant.h; sourceTree = "<group>"; };
+		8A2512DA1DAA84D10070B56F /* XDBConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDBConstant.m; sourceTree = "<group>"; };
+		8A2512DB1DAA84D10070B56F /* XDBField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDBField.h; sourceTree = "<group>"; };
+		8A2512DC1DAA84D10070B56F /* XDBField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDBField.m; sourceTree = "<group>"; };
+		8A2512DD1DAA84D10070B56F /* XDBRecordset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDBRecordset.h; sourceTree = "<group>"; };
+		8A2512DE1DAA84D10070B56F /* XDBRecordset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDBRecordset.m; sourceTree = "<group>"; };
 		DD44CD0E1DAA6CF800ED9023 /* XDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD44CD121DAA6CF800ED9023 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DD44CD141DAA6CF800ED9023 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -30,14 +38,6 @@
 		DD44CD1D1DAA6CF800ED9023 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD44CD201DAA6CF800ED9023 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD44CD221DAA6CF800ED9023 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DD44CD291DAA6D3C00ED9023 /* XDBConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDBConnection.h; sourceTree = "<group>"; };
-		DD44CD2A1DAA6D3C00ED9023 /* XDBConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDBConnection.m; sourceTree = "<group>"; };
-		DD44CD2B1DAA6D3C00ED9023 /* XDBConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDBConstant.h; sourceTree = "<group>"; };
-		DD44CD2C1DAA6D3C00ED9023 /* XDBConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDBConstant.m; sourceTree = "<group>"; };
-		DD44CD2D1DAA6D3C00ED9023 /* XDBField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDBField.h; sourceTree = "<group>"; };
-		DD44CD2E1DAA6D3C00ED9023 /* XDBField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDBField.m; sourceTree = "<group>"; };
-		DD44CD2F1DAA6D3C00ED9023 /* XDBRecordset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDBRecordset.h; sourceTree = "<group>"; };
-		DD44CD301DAA6D3C00ED9023 /* XDBRecordset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDBRecordset.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +51,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A2512D61DAA84D10070B56F /* XDB */ = {
+			isa = PBXGroup;
+			children = (
+				8A2512D91DAA84D10070B56F /* XDBConstant.h */,
+				8A2512DA1DAA84D10070B56F /* XDBConstant.m */,
+				8A2512DB1DAA84D10070B56F /* XDBField.h */,
+				8A2512DC1DAA84D10070B56F /* XDBField.m */,
+				8A2512D71DAA84D10070B56F /* XDBConnection.h */,
+				8A2512D81DAA84D10070B56F /* XDBConnection.m */,
+				8A2512DD1DAA84D10070B56F /* XDBRecordset.h */,
+				8A2512DE1DAA84D10070B56F /* XDBRecordset.m */,
+			);
+			name = XDB;
+			path = ../../XDB;
+			sourceTree = "<group>";
+		};
 		DD44CD051DAA6CF800ED9023 = {
 			isa = PBXGroup;
 			children = (
@@ -70,7 +86,7 @@
 		DD44CD101DAA6CF800ED9023 /* XDB */ = {
 			isa = PBXGroup;
 			children = (
-				DD44CD281DAA6D3C00ED9023 /* XDB */,
+				8A2512D61DAA84D10070B56F /* XDB */,
 				DD44CD141DAA6CF800ED9023 /* AppDelegate.h */,
 				DD44CD151DAA6CF800ED9023 /* AppDelegate.m */,
 				DD44CD171DAA6CF800ED9023 /* ViewController.h */,
@@ -90,22 +106,6 @@
 				DD44CD121DAA6CF800ED9023 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		DD44CD281DAA6D3C00ED9023 /* XDB */ = {
-			isa = PBXGroup;
-			children = (
-				DD44CD291DAA6D3C00ED9023 /* XDBConnection.h */,
-				DD44CD2A1DAA6D3C00ED9023 /* XDBConnection.m */,
-				DD44CD2B1DAA6D3C00ED9023 /* XDBConstant.h */,
-				DD44CD2C1DAA6D3C00ED9023 /* XDBConstant.m */,
-				DD44CD2D1DAA6D3C00ED9023 /* XDBField.h */,
-				DD44CD2E1DAA6D3C00ED9023 /* XDBField.m */,
-				DD44CD2F1DAA6D3C00ED9023 /* XDBRecordset.h */,
-				DD44CD301DAA6D3C00ED9023 /* XDBRecordset.m */,
-			);
-			name = XDB;
-			path = ../../../XDB;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,13 +179,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD44CD311DAA6D3C00ED9023 /* XDBConnection.m in Sources */,
-				DD44CD321DAA6D3C00ED9023 /* XDBConstant.m in Sources */,
+				8A2512DF1DAA84D10070B56F /* XDBConnection.m in Sources */,
+				8A2512E01DAA84D10070B56F /* XDBConstant.m in Sources */,
 				DD44CD191DAA6CF800ED9023 /* ViewController.m in Sources */,
 				DD44CD161DAA6CF800ED9023 /* AppDelegate.m in Sources */,
 				DD44CD131DAA6CF800ED9023 /* main.m in Sources */,
-				DD44CD331DAA6D3C00ED9023 /* XDBField.m in Sources */,
-				DD44CD341DAA6D3C00ED9023 /* XDBRecordset.m in Sources */,
+				8A2512E11DAA84D10070B56F /* XDBField.m in Sources */,
+				8A2512E21DAA84D10070B56F /* XDBRecordset.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
