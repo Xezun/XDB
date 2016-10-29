@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@class XDBConnection;
+
 @interface XDBRecordset : NSObject
+
+- (void)open:(NSString *)SQL connection:(XDBConnection *)connection;
 
 @end

@@ -10,8 +10,9 @@
 #import "XDBConstant.h"
 #import <sqlite3.h>
 #import "XDBField.h"
+#import "XDBRecordset.h"
 
-static void XDBRegisterErrorProvider();
+int sqlite3_exec_callback(void *execResult, int column_count, char **column_value, char **column_name);
 
 @interface XDBField (XDB)
 
@@ -19,13 +20,73 @@ static void XDBRegisterErrorProvider();
 
 @end
 
+@interface XDBConnection ()
+
+@property (nonatomic, assign, readonly) sqlite3 *conn;
+
+@end
+
 @implementation XDBConnection
 
-+ (void)load {
-    XDBRegisterErrorProvider();
+- (instancetype)initWithPath:(NSString *)path {
+    self = [super init];
+    if (self != nil) {
+        _path = path.copy;
+    }
+    return self;
 }
 
+- (BOOL)open {
+    if ([self isOpen]) {
+        return YES;
+    }
+    int result = sqlite3_open(_path.UTF8String, &_conn);
+    _open = (result == SQLITE_OK);
+    return _open;
+}
 
+- (BOOL)close {
+    if (![self isOpen]) {
+        return YES;
+    }
+    int result = sqlite3_close(_conn);
+    _open = !(result == SQLITE_OK);
+    return !_open;
+}
+
+- (XDBRecordset *)execute:(NSString *)sqlString error:(NSError *__autoreleasing *)error {
+    NSArray *result;
+    if ([self isOpen]) {
+        char *errmsg = NULL;
+        NSMutableArray *select_result = [[NSMutableArray alloc] init];
+        int result_code = sqlite3_exec(_conn, sqlString.UTF8String, sqlite3_exec_callback, (__bridge void *)select_result, &errmsg);
+        if (errmsg != NULL || result_code != SQLITE_OK) {
+            if (error != NULL) {
+                *error = [NSError errorWithDomain:kXDBErrorDomain code:result_code userInfo:@{NSLocalizedFailureReasonErrorKey: [NSString stringWithCString:errmsg encoding:NSUTF8StringEncoding]}];
+            }
+            sqlite3_free(errmsg);
+        } else {
+            if (select_result == nil) {
+                result = [NSArray arrayWithObject:[NSNumber numberWithInteger:result_code]];
+            } else {
+                result = [NSArray arrayWithObjects:[NSNumber numberWithInteger:result_code], select_result, nil];
+            }
+        }
+    } else {
+        result = [NSArray arrayWithObjects:[NSNumber numberWithInteger:SQLITE_ERROR], [SQLiteData descriptionForResultCode:SQLITE_ERROR], nil];
+    }
+    return result;
+}
+
++ (void)handleError:(NSError **)error statusCode:(NSInteger)statusCode errorMessage:(const char *)errorMessage {
+    if (error != NULL) {
+        NSDictionary *userInfo = nil;
+        if (errorMessage != NULL) {
+            userInfo = @{NSLocalizedFailureReasonErrorKey: [NSString stringWithCString:errorMessage encoding:(NSUTF8StringEncoding)]};
+        }
+        *error = [NSError errorWithDomain:kXDBErrorDomain code:statusCode userInfo:userInfo];
+    }
+}
 
 @end
 
@@ -43,139 +104,24 @@ static void XDBRegisterErrorProvider();
 
 @end
 
-static void XDBRegisterErrorProvider() {
-    [NSError setUserInfoValueProviderForDomain:kXDBErrorDomain provider:^id _Nullable(NSError * _Nonnull err, NSString * _Nonnull userInfoKey) {
-        if ([userInfoKey isEqualToString:NSLocalizedDescriptionKey]) {
-            switch (err.code) {
-                case SQLITE_OK:
-                    return @"Successful result";
-                    break;
-                    
-                case SQLITE_ERROR:
-                    return @"SQL error or missing database";
-                    break;
-                    
-                case SQLITE_INTERNAL:
-                    return @"Internal logic error in SQLite";
-                    break;
-                    
-                case SQLITE_PERM:
-                    return @"Access permission denied";
-                    break;
-                    
-                case SQLITE_ABORT:
-                    return @"Callback routine requested an abort";
-                    break;
-                    
-                case SQLITE_BUSY:
-                    return @"The database file is locked";
-                    break;
-                    
-                case SQLITE_LOCKED:
-                    return @"A table in the database is locked";
-                    break;
-                    
-                case SQLITE_NOMEM:
-                    return @"A malloc() failed";
-                    break;
-                    
-                case SQLITE_READONLY:
-                    return @"Attempt to write a readonly database";
-                    break;
-                    
-                case SQLITE_INTERRUPT:
-                    return @"Operation terminated by sqlite3_interrupt()";
-                    break;
-                    
-                case SQLITE_IOERR:
-                    return @"Some kind of disk I/O error occurred";
-                    break;
-                    
-                case SQLITE_CORRUPT:
-                    return @"The database disk image is malformed";
-                    break;
-                    
-                case SQLITE_NOTFOUND:
-                    return @"Unknown opcode in sqlite3_file_control()";
-                    break;
-                    
-                case SQLITE_FULL:
-                    return @"Insertion failed because database is full";
-                    break;
-                    
-                case SQLITE_CANTOPEN:
-                    return @"Unable to open the database file";
-                    break;
-                    
-                case SQLITE_PROTOCOL:
-                    return @"Database lock protocol error";
-                    break;
-                    
-                case SQLITE_EMPTY:
-                    return @"Database is empty";
-                    break;
-                    
-                case SQLITE_SCHEMA:
-                    return @"The database schema changed";
-                    break;
-                    
-                case SQLITE_TOOBIG:
-                    return @"String or BLOB exceeds size limit";
-                    break;
-                    
-                case SQLITE_CONSTRAINT:
-                    return @"Abort due to constraint violation";
-                    break;
-                    
-                case SQLITE_MISMATCH:
-                    return @"Data type mismatch";
-                    break;
-                    
-                case SQLITE_MISUSE:
-                    return @"Library used incorrectly";
-                    break;
-                    
-                case SQLITE_NOLFS:
-                    return @"Uses OS features not supported on host";
-                    break;
-                    
-                case SQLITE_AUTH:
-                    return @"Authorization denied";
-                    break;
-                    
-                case SQLITE_FORMAT:
-                    return @"Auxiliary database format error";
-                    break;
-                    
-                case SQLITE_RANGE:
-                    return @"2nd parameter to sqlite3_bind out of range";
-                    break;
-                    
-                case SQLITE_NOTADB:
-                    return @"File opened that is not a database file";
-                    break;
-                    
-                case SQLITE_NOTICE:
-                    return @"Notifications from sqlite3_log()";
-                    break;
-                    
-                case SQLITE_WARNING:
-                    return @"Warnings from sqlite3_log()";
-                    break;
-                    
-                case SQLITE_ROW:
-                    return @"sqlite3_step() has another row ready";
-                    break;
-                    
-                case SQLITE_DONE:
-                    return @"sqlite3_step() has finished executing";
-                    break;
-                    
-                default:
-                    return @"Unknown result code";
-                    break;
-            }
+
+static int sqlite3_exec_callback(void *execResult, int column_count, char **column_value, char **column_name) {
+    NSMutableArray *array = (__bridge NSMutableArray *)(execResult);
+    NSMutableDictionary *tmp = [NSMutableDictionary dictionary];
+    for (NSInteger i = 0; i < column_count; i ++) {
+        NSString *field; id value;
+        if (column_name[i]) {
+            field = [NSString stringWithUTF8String:column_name[i]];
+        }else{
+            field = [NSString stringWithFormat:@"(%ld)", i];
         }
-        return nil;
-    }];
+        if (column_value[i]) {
+            value = [NSString stringWithUTF8String:column_value[i]];
+        }else{
+            value = [NSNull null];
+        }
+        tmp[field] = value;
+    }
+    [array addObject:tmp];
+    return 0;
 }
